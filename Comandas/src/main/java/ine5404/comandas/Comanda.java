@@ -5,24 +5,36 @@
  */
 package ine5404.comandas;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  *
  * @author martin
  */
-public class Comanda {
+public class Comanda implements Serializable{
     protected Cliente cliente;
-    //faca uma lista de pedidos
+    protected List pedidos;
 
     public Comanda(Cliente cliente) {
         this.cliente = cliente;
+        this.pedidos = new ArrayList<>();
     }
     
     public void addPedido(Pedido pedido){
-        //implementar
+        this.pedidos.add(pedido);
     }
     
     public double getTotal(){
-        //implementar        
-        return -1;
+        Iterator<Pedido> it = this.pedidos.iterator();
+        double valor = 0;
+        
+        while(it.hasNext())
+            valor += it.next().getValor();
+        
+        return valor;
+            
     }
 }
